@@ -1,0 +1,24 @@
+<nav v-if="totalPages > 1">
+    <ul class="pagination">
+        <li>
+            <a :href="previousButtonUrl" :disabled="!previousButtonUrl">
+                <span :class="{'text-muted': !previousButtonUrl}"> Previous </span>
+            </a>
+        </li>
+        <li v-for="page in pages" :class="{active: page.number == currentPage}" :disabled="page.number === null">
+            <a :href="page.url">
+                {{ page.number ? page.number : '...' }}
+            </a>
+        </li>
+        <li>
+            <a :href="nextButtonUrl" :disabled="!nextButtonUrl">
+                <span :class="{'text-muted': !nextButtonUrl}"> Next </span>
+            </a>
+        </li>
+        <li v-if="totalPages > maxPageButtons">
+            <a @click="jumpToPage" class="clickable" title="Jump to a page" aria-label="Jump">
+                <span class="glyphicon glyphicon-share"></span>
+            </a>
+        </li>
+    </ul>
+</nav>
